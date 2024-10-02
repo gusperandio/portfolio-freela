@@ -7,35 +7,20 @@ import { StackList } from "@/components/StackList";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import { useEffect, useState } from "react";
-import FloatingButton from "@/components/FloatButton";
 import { InfiniteMovingCardsDemo } from "@/components/InfiniteMovingCardsDemo";
 import { LampDemo } from "@/components/Lamp";
 import { TracingBeam } from "@/components/TracingBeam";
-import Logo from "@/components/Logo";
 import Companies from "@/components/Companies";
 import Integration from "@/components/Integration";
+import { IFeedbackRequest } from "@/types/feedback";
 
 export default function Home() {
-  const [activeButton, setActiveButton] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 1200) setActiveButton(true);
-    else setActiveButton(false);
-  };
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
     AOS.init({ duration: 1000 });
-    window.addEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div>  
+    <div>
       <div className="flex min-h-screen w-full flex-col">
         <div>
           <LampDemo />
@@ -44,12 +29,11 @@ export default function Home() {
           <section className="relative isolate overflow-hidden px-6 py-0 sm:py-32 lg:px-8">
             <TracingBeam className="px-6">
               <div className="max-w-4xl mx-auto antialiased pt-4 relative">
-                
                 <Integration />
                 <div data-aos="fade-left">
                   <Specifications />
                 </div>
-                
+
                 <div data-aos="fade-right">
                   <StackList
                     tec={"FrontEnd"}

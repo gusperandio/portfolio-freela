@@ -2,6 +2,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { IFeedbackRequest } from "@/types/feedback";
 import React, { useEffect, useState } from "react";
 
 export const InfiniteMovingCards = ({
@@ -11,11 +12,7 @@ export const InfiniteMovingCards = ({
   pauseOnHover = true,
   className,
 }: {
-  items: {
-    quote: string;
-    name: string;
-    title: string;
-  }[];
+  items: IFeedbackRequest[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
@@ -58,9 +55,9 @@ export const InfiniteMovingCards = ({
         );
       }
     }
-  };
+  }; 
   const getSpeed = () => {
-    if (containerRef.current) {
+    if (containerRef.current) { 
       if (speed === "fast") {
         containerRef.current.style.setProperty("--animation-duration", "20s");
       } else if (speed === "normal") {
@@ -97,15 +94,17 @@ export const InfiniteMovingCards = ({
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               <span className=" relative z-20 text-sm leading-[1.6] text-gray-100 font-normal">
-                {item.quote}
+                {item.description}
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
-                  <span className=" text-base leading-[1.6] text-gray-800 font-bold">
-                    {item.name}
-                  </span>
+                  {item.showName && (
+                    <span className=" text-base leading-[1.6] text-gray-800 font-bold">
+                      {item.name}
+                    </span>
+                  )}
                   <span className=" text-sm leading-[1.6] text-gray-700 font-normal">
-                    {item.title}
+                    {item.company}
                   </span>
                 </span>
               </div>

@@ -14,8 +14,23 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Page() {
+  const [showName, setShowName] = useState(false);
+
   const saveSettings = async (): Promise<boolean> => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     //throw new Error('This is an example exception');
@@ -31,8 +46,8 @@ export default function Page() {
           <div className="flex justify-center flex-col">
             <b className="text-center">Feedback enviado </b>
             <p className="text-xs text-justify mt-2">
-              Agradeço seu feedback, ele é super importante para evolução do
-              meu trabalho.
+              Agradeço seu feedback, ele é super importante para evolução do meu
+              trabalho.
             </p>
           </div>
         ),
@@ -42,10 +57,27 @@ export default function Page() {
         duration: 4000,
       }
     );
+  const formSchema = z.object({
+    username: z.string().min(2, {
+      message: "Username must be at least 2 characters.",
+    }),
+  });
 
-  return (
-    <div className="h-full flex items-center flex-col justify-center">
-      <div>
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
+
+{/* <div>
         {" "}
         <Toaster />
       </div>
@@ -59,28 +91,28 @@ export default function Page() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4">
+          <div className="grid gap-6">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="email@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label>Nome</Label>
               <Input
                 id="name"
                 type="text"
-                placeholder="Nome e Sobrenome"
+                placeholder="Ex: Maria Silva"
                 required
               />
             </div>
+            <div className="grid gap-2">
+              <Label htmlFor="email">Nome empresa ou software</Label>
+              <Input id="name" type="text" placeholder="Ex: Google" required />
+            </div>
             <div className="flex flex-row gap-2">
-              <Checkbox checked={true} /> 
-              <Label htmlFor="text">Mostrar meu nome na lista de Avaliações</Label>
+              <Checkbox
+                checked={showName}
+                onClick={() => setShowName(!showName)}
+              />
+              <Label htmlFor="text">
+                Mostrar meu nome na lista de Avaliações
+              </Label>
             </div>
             <div className="grid gap-2 mt-2">
               <div className="flex items-center">
@@ -93,7 +125,31 @@ export default function Page() {
             </Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
+
+  return (
+    <div className="h-full flex items-center flex-col justify-center">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="shadcn" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your public display name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Form>
     </div>
   );
 }
