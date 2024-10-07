@@ -14,7 +14,7 @@ const als = Inter({
 export const metadata: Metadata = {
   title: "Gustavo Sperandio",
   description: "Desenvolvedor Full Stack",
-  icons: "/Marca d'água - Leticia Jardim-25.png",
+  icons: "/sharingan2.png",
 };
 
 export default function RootLayout({

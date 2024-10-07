@@ -26,7 +26,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const feedbackData = await request.json();
-
+    console.log(feedbackData);
     if (!feedbackData) {
       throw new Error("Feedback data is missing");
     }
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
         showName: feedback.showName,
       },
     });
-
+    console.log(newFeedback)
     if (newFeedback)
       return new NextResponse(JSON.stringify({ ok: true }), {
         status: 200,

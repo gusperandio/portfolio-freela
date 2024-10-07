@@ -2,6 +2,7 @@ import { CloudDownload, LockKeyholeIcon, ServerIcon } from "lucide-react";
 import CardMe from "../CardME";
 import { BackgroundBeamsWithCollision } from "../BeamsCollision";
 import Logo from "../Logo";
+import SocialMedia from "../SocialMedias";
 
 export default function HowIAM() {
   return (
@@ -34,14 +35,7 @@ export default function HowIAM() {
         <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           <div className="lg:pr-4">
             <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
-              <p>
-                Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget
-                risus enim. Mattis mauris semper sed amet vitae sed turpis id.
-                Id dolor praesent donec est. Odio penatibus risus viverra tellus
-                varius sit neque erat velit. Faucibus commodo massa rhoncus,
-                volutpat. Dignissim sed eget risus enim. Mattis mauris semper
-                sed amet vitae sed turpis id.
-              </p>
+               <SocialMedia /> 
             </div>
           </div>
         </div>

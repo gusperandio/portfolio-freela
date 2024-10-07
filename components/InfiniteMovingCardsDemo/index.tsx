@@ -26,7 +26,7 @@ export function InfiniteMovingCardsDemo() {
 
   return (
     <div className="mt-24">
-      <h3 className="ml-24 text-2xl font-bold tracking-tight text-gray-900">
+      <h3 className="ml-24 text-2xl font-bold tracking-tight text-slate-100">
         Feedbacks
       </h3>
       <div className="h-[20rem] rounded-md flex flex-col antialiased dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
