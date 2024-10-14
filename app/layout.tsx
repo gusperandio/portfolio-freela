@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-
+import { Analytics } from "@vercel/analytics/react";
 import { cn } from "@/lib/utils";
 import FloatingButton from "@/components/FloatButton";
 
@@ -30,8 +30,14 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
       </head>
-      <body className={cn("h-screen bg-background bg-[#020617] antialiased", als.className)}>
+      <body
+        className={cn(
+          "h-screen bg-background bg-[#020617] antialiased",
+          als.className
+        )}
+      >
         {children}
+        <Analytics />
       </body>
     </html>
   );
